@@ -1,0 +1,6 @@
+artifact_location: mlflow-artifacts:/491607878003452865
+creation_time: 1703329182558
+experiment_id: '491607878003452865'
+last_update_time: 1703329182558
+lifecycle_stage: active
+name: IRIS dataset classification

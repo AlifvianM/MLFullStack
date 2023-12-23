@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1703330958353
+current_stage: None
+description: ''
+last_updated_timestamp: 1703330958353
+name: RandomForestIrisModel
+run_id: f5e0e46ecfa24555af16be08d6ebe3dc
+run_link: ''
+source: mlflow-artifacts:/491607878003452865/f5e0e46ecfa24555af16be08d6ebe3dc/artifacts/sklearn-model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/491607878003452865/f5e0e46ecfa24555af16be08d6ebe3dc/artifacts/sklearn-model
+user_id: null
+version: 7

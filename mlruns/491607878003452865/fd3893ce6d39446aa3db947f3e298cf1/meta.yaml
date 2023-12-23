@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/491607878003452865/fd3893ce6d39446aa3db947f3e298cf1/artifacts
+end_time: 1703329303673
+entry_point_name: ''
+experiment_id: '491607878003452865'
+lifecycle_stage: active
+run_id: fd3893ce6d39446aa3db947f3e298cf1
+run_name: iris dataset rf run
+run_uuid: fd3893ce6d39446aa3db947f3e298cf1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1703329301737
+status: 3
+tags: []
+user_id: alifvianmarco
