@@ -62,6 +62,9 @@ print('Run ID: {}'.format(run_id))
 
 model_uri = "runs:/{}/sklearn-model".format(run_id)
 mv = mlflow.register_model(model_uri, "RandomForestIrisModel")
+
+mlflow.sklearn.save_model(clf, "model_clf_randomforest")
+
 print("Name: {}".format(mv.name))
 print("Version: {}".format(mv.version))
 
