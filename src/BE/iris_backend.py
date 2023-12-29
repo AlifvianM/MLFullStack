@@ -1,7 +1,7 @@
 from typing import Union
 
 from fastapi import FastAPI
-from .model import InputData
+from model import InputData
 import pickle
 
 app = FastAPI()

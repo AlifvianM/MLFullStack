@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  api_service:
+    build: ./src/BE/
+    command: uvicorn iris_backend:app --reload --host 0.0.0.0 --port 8000
+    volumes:
+      - ./src/BE/:/app/
+    ports:
+      - 8001:8000
+    # environment:
+    #   - DATABASE_URI=postgresql://api_db_username:api_db_password@api_db/api_db_dev
+    #   - CAST_SERVICE_HOST_URL=http://api_service:8000/api/v1/<ENPOINT>/
+    # depends_on:
+    #   - movie_db
