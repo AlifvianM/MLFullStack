@@ -3,13 +3,26 @@ version: '3.7'
 services:
   api_service:
     build: ./src/BE/
+    container_name: apiservice
     command: uvicorn iris_backend:app --reload --host 0.0.0.0 --port 8000
     volumes:
-      - ./src/BE/:/app/
+      - ./src/BE/:/app_backend/
+      - ./src/BE/model/:/app_backend/model/
     ports:
-      - 8001:8000
+      - 8000:8000
     # environment:
     #   - DATABASE_URI=postgresql://api_db_username:api_db_password@api_db/api_db_dev
     #   - CAST_SERVICE_HOST_URL=http://api_service:8000/api/v1/<ENPOINT>/
     # depends_on:
     #   - movie_db
+
+  streamlit_service:
+    build: ./src/FE/
+    container_name: feservice
+    command: streamlit run iris_frontend.py
+    volumes:
+      - ./src/FE/:/app_frontend/
+    ports:
+      - 8501:8501
+    links:
+      - api_service
