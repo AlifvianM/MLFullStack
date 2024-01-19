@@ -3,7 +3,7 @@ version: '3.7'
 services:
   api_service:
     build: ./src/BE/
-    container_name: apiservice
+    # container_name: apiservice
     command: uvicorn iris_backend:app --reload --host 0.0.0.0 --port 8000
     volumes:
       - ./src/BE/:/app_backend/

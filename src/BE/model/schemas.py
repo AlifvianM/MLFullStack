@@ -1,10 +1,13 @@
 from pydantic import BaseModel
 
-class InputData(BaseModel):
+class IrisData(BaseModel):
     sepal_length : float
     petal_length : float
     sepal_width : float
     petal_width : float
+
+    class Config:
+        orm_mode = True
 
     def get_json(self):
         return {
@@ -13,3 +16,4 @@ class InputData(BaseModel):
             "sepal_width":self.sepal_width,
             "petal_width":self.petal_width
         }
+    

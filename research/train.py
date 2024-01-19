@@ -72,7 +72,6 @@ print("Version: {}".format(mv.version))
 logged_model = 'runs:/{}/model'.format(run_id)
 
 # Load model as a PyFuncModel.
-import pdb; pdb.set_trace()
 loaded_model = mlflow.pyfunc.load_model(logged_model)
 
 # Predict on a Pandas DataFrame.

@@ -21,7 +21,7 @@ with st.form('iris-form'):
     if submit:
         st.snow()
         with st.spinner("Predicting....."):
-            result = requests.post('http://apiservice:8000/predict/', json={
+            result = requests.post('http://api_service-1:8000/predict/', json={
                 "sepal_length":sepal_length,
                 "petal_length":petal_length,
                 "sepal_width":sepal_width,

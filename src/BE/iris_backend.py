@@ -1,12 +1,26 @@
 from typing import Union
 
-from fastapi import FastAPI
-from model.model import InputData
+from fastapi import FastAPI, HTTPException, Depends
+from model.schemas import IrisData
 from fastapi.middleware.cors import CORSMiddleware
+from model.database import SessionLocal, base, engine
+from model import models, schemas
+from sqlalchemy.orm import Session
+from . import crud
+
 import pickle
 
-app = FastAPI()
+models.Base.metadata.create_all(bind=engine)
 
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    except:
+        db.close()
+
+app = FastAPI()
 
 origins = [
     "http://localhost.tiangolo.com",
@@ -35,8 +49,8 @@ def check_model():
         loaded_model = pickle.load(file)
     return loaded_model
 
-@app.post("/predict/")   
-async def predict(request: InputData):
+@app.post("/predict/", response_model=schemas.IrisData)   
+async def predict(request: IrisData, db:Session = Depends(get_db)):
     model = check_model()
     data = request.get_json()
     try:
@@ -48,7 +62,13 @@ async def predict(request: InputData):
                 data["petal_width"]
             ]
         ])[0]
-
+        crud.create_iris(
+            db=db, 
+            sepal_length = data["sepal_length"],
+            petal_length = data["petal_length"],
+            sepal_width = data["sepal_width"],
+            petal_width = data["petal_width"],
+        )
         return {
             "data_test":data,
             "model":str(model),

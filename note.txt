@@ -1,0 +1,4 @@
+POSTGRES_DB = irisdb
+POSTGRES_USERNAME = alifvianmarco
+POSTGRES_PASSWORD = alifvianmarco
+POSTGRES_COMMAND_LOGIN = psql -d irisdb -U alifvianmarco
