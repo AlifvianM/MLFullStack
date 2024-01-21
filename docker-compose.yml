@@ -4,17 +4,27 @@ services:
   api_service:
     build: ./src/BE/
     # container_name: apiservice
-    command: uvicorn iris_backend:app --reload --host 0.0.0.0 --port 8000
+    command: bash -c "alembic upgrade head && uvicorn iris_backend:app --reload --host 0.0.0.0 --port 8000"
     volumes:
       - ./src/BE/:/app_backend/
-      - ./src/BE/model/:/app_backend/model/
+      - ./alembic.ini:/app_backend/
     ports:
       - 8000:8000
     # environment:
     #   - DATABASE_URI=postgresql://api_db_username:api_db_password@api_db/api_db_dev
     #   - CAST_SERVICE_HOST_URL=http://api_service:8000/api/v1/<ENPOINT>/
-    # depends_on:
-    #   - movie_db
+    depends_on:
+      - postgres
+    # networks:
+    #   - backend
+    env_file:
+      - src/BE/.env_docker
+    environment:
+      - DATABASE_HOSTNAME=${POSTGRES_HOST}
+      - DATABASE_PORT=${POSTGRES_PORT}
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      - DATABASE_NAME=${POSTGRES_DB}
+      - DATABASE_USERNAME=${POSTGRES_USER}
 
   streamlit_service:
     build: ./src/FE/
@@ -26,3 +36,22 @@ services:
       - 8501:8501
     links:
       - api_service
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres_data:
+
+# networks:
+#   backend:
+#      driver: bridge
