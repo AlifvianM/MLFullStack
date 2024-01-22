@@ -1,10 +1,10 @@
 from sqlalchemy import String, Boolean, Integer, Column, text, TIMESTAMP, Float
-from database import base
+from .database import Base
 from uuid import uuid4
 from sqlalchemy.dialects.postgresql import UUID
 
 
-class Iris(base):
+class Iris(Base):
     __tablename__ = "iris"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)

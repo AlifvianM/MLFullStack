@@ -1,10 +1,9 @@
 from sqlalchemy.orm import Session
-from BE.model import schemas
+from model.schemas import IrisData
+from model.models import Iris
 
-from model import models
-
-def create_iris(db: Session, user: schemas.InputData):
-    db_iris = models.Iris(
+def create_iris(db: Session, user: IrisData):
+    db_iris = Iris(
         sepal_length = user.sepal_length,
         petal_length = user.petal_length,
         sepal_width = user.sepal_width,

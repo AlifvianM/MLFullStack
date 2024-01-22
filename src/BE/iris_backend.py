@@ -3,10 +3,10 @@ from typing import Union
 from fastapi import FastAPI, HTTPException, Depends
 from model.schemas import IrisData
 from fastapi.middleware.cors import CORSMiddleware
-from model.database import SessionLocal, base, engine
+from model.database import SessionLocal, Base, engine
 from model import models, schemas
 from sqlalchemy.orm import Session
-from . import crud
+import crud
 
 import pickle
 
