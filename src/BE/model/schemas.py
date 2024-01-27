@@ -5,6 +5,7 @@ class IrisData(BaseModel):
     petal_length : float
     sepal_width : float
     petal_width : float
+    species : str = None
 
     class Config:
         orm_mode = True

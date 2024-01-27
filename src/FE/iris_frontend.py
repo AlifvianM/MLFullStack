@@ -19,13 +19,18 @@ with st.form('iris-form'):
     submit = st.form_submit_button('predict')
 
     if submit:
-        st.snow()
         with st.spinner("Predicting....."):
-            result = requests.post('http://api_service-1:8000/predict/', json={
-                "sepal_length":sepal_length,
-                "petal_length":petal_length,
-                "sepal_width":sepal_width,
-                "petal_width":petal_width,
-            }).json()
+            response = requests.post('http://host.docker.internal:8000/predict/', json={
+                "sepal_length": sepal_length,
+                "petal_length": petal_length,
+                "sepal_width": sepal_width,
+                "petal_width": petal_width,
+            })
 
-        st.info(f'Your Iris is {result["result"]}')
+            try:
+                result = response.json()
+                print("Result FE =", result)
+                st.info(f'Your Iris is {result["result"]}')
+            except ValueError:
+                print("Failed to parse JSON response:", response.content)
+                st.error("Failed to parse the prediction result.")

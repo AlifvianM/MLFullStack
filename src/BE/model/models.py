@@ -12,3 +12,4 @@ class Iris(Base):
     petal_length = Column(Float, nullable=False)
     sepal_width = Column(Float, nullable=False)
     petal_width = Column(Float, nullable=False)
+    species = Column(String, nullable=True)

@@ -4,8 +4,8 @@ from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 import os
 
-# load_dotenv() #for running locally
-load_dotenv("src/BE/.env") #for running at docker
+load_dotenv() #for running locally
+# load_dotenv("src/BE/.env") #for running at docker
 # "postgresql://your_postgres_user:your_postgres_password@your_postgres_container_name/your_database_name"
 # DATABASE_URL = os.environ["POSTGRES_URL"]
 
@@ -18,7 +18,3 @@ SessionLocal = sessionmaker(autocommit = False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 print("CONNECTED INTO DB")
-
-# if __name__ == '__main__':
-#     # import pdb;pdb.set_trace()
-#     get_db()
